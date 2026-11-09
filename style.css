@@ -1,0 +1,489 @@
+:root {
+    --cor-fundo: #f3f5f8;
+    --cor-cartao: #ffffff;
+    --cor-texto: #1f2933;
+    --cor-suave: #64707d;
+    --cor-borda: #dce2e8;
+    --cor-principal: #1d4e89;
+    --cor-erro: #c92a2a;
+    --cor-favorito: #e8a200;
+    --cor-esqueleto: #e2e7ec;
+
+    --cor-norte: #2b8a3e;
+    --cor-nordeste: #e8590c;
+    --cor-centro-oeste: #c2255c;
+    --cor-sudeste: #1971c2;
+    --cor-sul: #6741d9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    min-height: 100vh;
+}
+
+.topo {
+    background-color: var(--cor-principal);
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+.topo h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.subtitulo {
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+.conteudo {
+    width: min(1200px, 100%);
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* Filtros */
+
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.filtros p {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    min-width: 200px;
+}
+
+.filtros label {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.campo-busca,
+.campo-ordem {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    background-color: var(--cor-cartao);
+    color: var(--cor-texto);
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.campo-busca:focus,
+.campo-ordem:focus {
+    border-color: var(--cor-principal);
+}
+
+/* regiões */
+
+.tem-submenu {
+    position: relative;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.menu-regioes {
+    padding: 10px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 30px;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+.menu-regioes:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.submenu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -10px);
+    min-width: 190px;
+    padding: 8px;
+    background-color: var(--cor-cartao);
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    z-index: 10;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+}
+
+.tem-submenu:hover .submenu,
+.tem-submenu:focus-within .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}
+
+.opcao-regiao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: transparent;
+    color: var(--cor-texto);
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.opcao-regiao:hover {
+    background-color: var(--cor-fundo);
+}
+
+.opcao-regiao.ativo {
+    background-color: var(--cor-principal);
+    color: white;
+}
+
+.quantidade {
+    font-size: 0.8rem;
+}
+
+/* favoritos */
+
+.barra {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.botao-favoritos {
+    padding: 10px 16px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 30px;
+    background-color: var(--cor-cartao);
+    color: var(--cor-texto);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.botao-favoritos:hover {
+    border-color: var(--cor-principal);
+    background-color: var(--cor-principal);
+    color: white;
+}
+
+.botao-favoritos.ativo {
+    background-color: var(--cor-principal);
+    color: white;
+    border-color: var(--cor-principal);
+}
+
+/* status */
+
+.status {
+    color: var(--cor-suave);
+    font-size: 0.9rem;
+    margin: 20px 0;
+}
+
+.status.erro {
+    color: var(--cor-erro);
+}
+
+.lista-de-estados {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    list-style: none;
+}
+
+/* cards */
+
+.estado {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 230px;
+    padding: 22px;
+    background-color: var(--cor-cartao);
+    border: 1px solid var(--cor-borda);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.estado::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background-color: var(--cor-regiao);
+}
+
+.estado:not(.esqueleto) {
+    animation: surgir 0.5s ease both;
+}
+
+@keyframes surgir {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.estado:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* cores das regiões */
+
+.estado[data-regiao="Norte"] {
+    --cor-regiao: var(--cor-norte);
+}
+
+.estado[data-regiao="Nordeste"] {
+    --cor-regiao: var(--cor-nordeste);
+}
+
+.estado[data-regiao="Centro-Oeste"] {
+    --cor-regiao: var(--cor-centro-oeste);
+}
+
+.estado[data-regiao="Sudeste"] {
+    --cor-regiao: var(--cor-sudeste);
+}
+
+.estado[data-regiao="Sul"] {
+    --cor-regiao: var(--cor-sul);
+}
+
+.estado-sigla {
+    color: var(--cor-regiao);
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.estado-nome {
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+    color: var(--cor-texto);
+}
+
+.estado-regiao {
+    color: var(--cor-regiao);
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.estado-municipios {
+    color: var(--cor-suave);
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+}
+
+.estado-municipios.erro {
+    color: var(--cor-erro);
+}
+
+.estado-municipios.buscando {
+    animation: pulsar 1.5s ease-in-out infinite;
+}
+
+.estado-acoes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.botao-municipios {
+    padding: 9px 12px;
+    border: none;
+    border-radius: 7px;
+    background-color: var(--cor-principal);
+    color: white;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background-color 0.3s, opacity 0.3s;
+}
+
+.botao-municipios:hover {
+    background-color: var(--cor-regiao);
+}
+
+.botao-municipios:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* estrela */
+
+.botao-favorito {
+    border: none;
+    background: transparent;
+    color: #a0a8b0;
+    font-size: 1.7rem;
+    cursor: pointer;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.botao-favorito:hover {
+    transform: scale(1.2);
+}
+
+.botao-favorito.favorito {
+    color: var(--cor-favorito);
+}
+
+.estado.esqueleto {
+    min-height: 230px;
+    background-color: var(--cor-esqueleto);
+    border: none;
+    animation: pulsar 1.5s ease-in-out infinite;
+}
+
+.estado.esqueleto::before {
+    display: none;
+}
+
+@keyframes pulsar {
+    0% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.5;
+    }
+}
+
+.sobre-dados {
+    margin-top: 45px;
+    padding: 25px;
+    background-color: var(--cor-cartao);
+    border: 1px solid var(--cor-borda);
+    border-radius: 12px;
+}
+
+.sobre-dados h2 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.duvida {
+    margin-bottom: 10px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.duvida summary {
+    padding: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.duvida summary:hover {
+    background-color: var(--cor-fundo);
+}
+
+.duvida[open] summary {
+    color: var(--cor-principal);
+}
+
+.duvida-resposta {
+    padding: 0 15px 15px;
+    color: var(--cor-suave);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    animation: surgir 0.4s ease;
+}
+
+.rodape {
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 40px;
+    color: var(--cor-suave);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--cor-borda);
+}
+
+@media (max-width: 500px) {
+
+    .topo {
+        padding: 28px 15px;
+    }
+
+    .topo h1 {
+        font-size: 1.6rem;
+    }
+
+    .conteudo {
+        padding: 0 15px;
+        margin: 20px auto;
+    }
+
+    .barra {
+        align-items: flex-start;
+    }
+
+    .botao-favoritos {
+        width: 100%;
+    }
+
+    .lista-de-estados {
+        gap: 15px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}

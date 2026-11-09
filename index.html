@@ -1,0 +1,142 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estados do Brasil</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <header class="topo">
+
+        <h1>Estados do Brasil</h1>
+
+        <p class="subtitulo">
+            As 27 unidades da federação, com os dados do IBGE
+        </p>
+
+        <nav class="tem-submenu">
+
+            <button type="button" class="menu-regioes">
+                Regiões ▾
+            </button>
+
+            <div class="submenu">
+
+                <button type="button" class="opcao-regiao ativo" data-regiao="">
+                    <span class="rotulo">Todas</span>
+                    <span class="quantidade"></span>
+                </button>
+
+                <button type="button" class="opcao-regiao" data-regiao="Norte">
+                    <span class="rotulo">Norte</span>
+                    <span class="quantidade"></span>
+                </button>
+
+                <button type="button" class="opcao-regiao" data-regiao="Nordeste">
+                    <span class="rotulo">Nordeste</span>
+                    <span class="quantidade"></span>
+                </button>
+
+                <button type="button" class="opcao-regiao" data-regiao="Centro-Oeste">
+                    <span class="rotulo">Centro-Oeste</span>
+                    <span class="quantidade"></span>
+                </button>
+
+                <button type="button" class="opcao-regiao" data-regiao="Sudeste">
+                    <span class="rotulo">Sudeste</span>
+                    <span class="quantidade"></span>
+                </button>
+
+                <button type="button" class="opcao-regiao" data-regiao="Sul">
+                    <span class="rotulo">Sul</span>
+                    <span class="quantidade"></span>
+                </button>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+    <main class="conteudo">
+
+        <form class="filtros">
+
+            <p>
+                <label for="busca">Buscar pelo nome</label>
+                <input
+                    type="search"
+                    id="busca"
+                    class="campo-busca"
+                    placeholder="Ex.: Paraná"
+                >
+            </p>
+
+            <p>
+                <label for="ordem">Ordenar</label>
+                <select id="ordem" class="campo-ordem">
+                    <option value="nome">Nome (A–Z)</option>
+                    <option value="nome-invertido">Nome (Z–A)</option>
+                    <option value="regiao">Região</option>
+                </select>
+            </p>
+
+        </form>
+
+        <div class="barra">
+
+            <button type="button" class="botao-favoritos">
+                ★ Só favoritos
+            </button>
+
+        </div>
+
+        <p class="status" aria-live="polite">
+            Carregando os estados...
+        </p>
+
+        <ul class="lista-de-estados"></ul>
+
+        <section class="sobre-dados">
+
+            <h2>Sobre os dados</h2>
+
+            <details class="duvida">
+                <summary>De onde vêm os dados?</summary>
+                <p class="duvida-resposta">
+                    Da API de localidades do IBGE, gratuita e sem cadastro.
+                </p>
+            </details>
+
+            <details class="duvida">
+                <summary>Por que o Distrito Federal aparece entre os estados?</summary>
+                <p class="duvida-resposta">
+                    Ele não é um estado, mas é uma das 27 unidades da federação,
+                    e o IBGE o lista junto com elas.
+                </p>
+            </details>
+
+            <details class="duvida">
+                <summary>Os favoritos ficam salvos onde?</summary>
+                <p class="duvida-resposta">
+                    No seu navegador, com o localStorage. Em outro computador,
+                    eles não aparecem.
+                </p>
+            </details>
+
+        </section>
+
+    </main>
+
+    <footer class="rodape">
+        <p>Dados: IBGE, API de localidades</p>
+    </footer>
+
+</body>
+</html>
